@@ -9,8 +9,8 @@ namespace Vectors.App
     public class Vector 
     {
         readonly List<double> _collection; //cannot be alterted outside constructor
-        protected double magnitude;
-        
+        readonly double magnitude; //cannot be alterted outside constructor
+
         public Vector(List<double> collection)
         {
             _collection = collection;
@@ -26,18 +26,36 @@ namespace Vectors.App
         public Vector Add(Vector myVector2) // Creates a new vector of larger size if a smaller size vector is used
         {
             List<double> sum = new List<double>();
+            int oneAdditions = 0;
+            int twoAdditions = 0;
             int maxLength = Math.Max(this._collection.Count, myVector2._collection.Count);
             for(int i = 0; i < maxLength; ++i)
             {
                 if(myVector2._collection.Count == i)
                 {
                     myVector2._collection.Add(0);
+                    twoAdditions += 1;
                 }
                 else if(this._collection.Count == i)
                 {
                     this._collection.Add(0);
+                    oneAdditions += 1;
                 }
                 sum.Add(this._collection[i] + myVector2._collection[i]);
+            }
+            if(twoAdditions > 0)
+            {
+                for (int i = 0; i < twoAdditions; ++i)
+                {
+                    myVector2._collection.RemoveAt(myVector2._collection.Count - 1);
+                }
+            }
+            else if(oneAdditions > 0)
+            {
+                for (int i = 0; i < oneAdditions; ++i)
+                {
+                    this._collection.RemoveAt(this._collection.Count - 1);
+                }
             }
             return new Vector(sum);
         }
@@ -56,7 +74,7 @@ namespace Vectors.App
         {
             if(this._collection.Count != myVector2._collection.Count)
             {
-                throw new DifferentSizesException(); // needs testing
+                throw new DifferentSizesException();
             }
             
             double result = 0;
@@ -67,7 +85,7 @@ namespace Vectors.App
             return result;
         }
 
-        public bool SameVector(Vector myVector2) // if different sizes its always wrong (intentionally)
+        public bool SameVector(Vector myVector2) // if different sizes its always false (intentionally)
         {
             if (myVector2._collection.Count != this._collection.Count)
             {
@@ -86,8 +104,13 @@ namespace Vectors.App
         // Convex Combination
 
         // Geometric Dot Product
-        public double AngleBetween(Vector myVector2, bool radians) //needs exception for different sizes
+        public double AngleBetween(Vector myVector2, bool radians) //exception for different sizes
         {
+            if (this._collection.Count != myVector2._collection.Count)
+            {
+                throw new DifferentSizesException();
+            }
+
             // angle code
             return 1;
         }

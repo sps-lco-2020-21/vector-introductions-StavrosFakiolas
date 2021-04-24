@@ -22,6 +22,7 @@ namespace VectorTests
             Vector myVector2 = new Vector(l2);
             Vector addition = myVector1.Add(myVector2);
             Assert.IsTrue(addition.SameVector(new Vector(expectedSum)));
+            Assert.IsTrue(myVector2.SameVector(new Vector(l2)));
         }
         
         [TestMethod]
@@ -48,6 +49,12 @@ namespace VectorTests
         {
             Vector myVector4 = new Vector(l4);
             Assert.AreEqual(5,myVector4.Magnitude);
+        }
+        
+        [TestMethod]
+        public void CheckSizeCorrection()
+        {
+            Vector myVector2 = new Vector(l2);
         }
     }
 }
