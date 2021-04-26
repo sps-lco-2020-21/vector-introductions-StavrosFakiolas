@@ -15,27 +15,27 @@ namespace VectorTests
         List<double> l4 = new List<double> { 3, 4};
 
         [TestMethod]
-        public void VectorAddition()
+        public void CheckVectorAddition()
         {
             List<double> expectedSum = new List<double> { 3, 10, 6 };
             Vector myVector1 = new Vector(l1);
             Vector myVector2 = new Vector(l2);
             Vector addition = myVector1.Add(myVector2);
-            Assert.IsTrue(addition.SameVector(new Vector(expectedSum)));
-            Assert.IsTrue(myVector2.SameVector(new Vector(l2)));
+            Assert.IsTrue(addition.Equals(new Vector(expectedSum)));
+            Assert.IsTrue(myVector2.Equals(new Vector(l2)));
         }
         
         [TestMethod]
-        public void VectorScalar()
+        public void CheckVectorScalar()
         {
             List<double> expectedResult = new List<double> { 6, 15, 18 };
             Vector myVector1 = new Vector(l1);
             Vector scale = myVector1.ScalarMultiple(3);
-            Assert.IsTrue(scale.SameVector(new Vector(expectedResult)));
+            Assert.IsTrue(scale.Equals(new Vector(expectedResult)));
         }
         
         [TestMethod]
-        public void DotProduct()
+        public void CheckDotProductA()
         {
             double expectedResult = 85;
             Vector myVector1 = new Vector(l1);
@@ -45,16 +45,20 @@ namespace VectorTests
         }
 
         [TestMethod]
-        public void MagnitudeCheck()
+        public void CheckMagnitude()
         {
             Vector myVector4 = new Vector(l4);
             Assert.AreEqual(5,myVector4.Magnitude);
         }
-        
+
         [TestMethod]
-        public void CheckSizeCorrection()
+        public void CheckConvex()
         {
-            Vector myVector2 = new Vector(l2);
+            List<double> expectedResult = new List<double> { 0.6, 5, 8.8 };
+            Vector myVector1 = new Vector(l1);
+            Vector myVector3 = new Vector(l3);
+            Vector combination = myVector1.ConvexCombinationG(myVector3, 0.3);
+            Assert.IsTrue(combination.Equals(new Vector(expectedResult)));
         }
     }
 }

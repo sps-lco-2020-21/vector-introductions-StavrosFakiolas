@@ -16,8 +16,6 @@ namespace Vectors.App
             Vector myVector1 = new Vector(l1);
             Vector myVector2 = new Vector(l2);
             Vector myVector3 = new Vector(l3);
-            Vector addition = myVector1.Add(myVector2);
-            myVector1.DotProductA(myVector2);
             Console.ReadKey();
         }
     }
